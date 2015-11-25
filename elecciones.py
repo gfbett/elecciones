@@ -13,12 +13,22 @@ class Telegrama:
         self.VotosEnBlanco= parts[9]
         self.VotosPositivos= parts[10]
         self.VotosValidos= parts[11]
-        self.votosCambiemos= parts[12]
-        self.votosFPV= parts[13]
-
+        self.VotosCambiemos= parts[12]
+        self.VotosFPV= parts[13]
 
 def main():
     v = cargar_datos()
+
+'''
+previo a mostrar los telegramas filtraría por los que son inconsistentes.
+aplicar uno o varios filter a la colección previo definir qué es inconsistentes
+sugerencia:
+    VotosPositivos = VotosCambiemos + VotosFPV
+    VotosValidos = VotosPositivos + VotosEnBlanco
+    TotalVotantes = VotosRecurridos + VotosImpugnados + VotosEnBlanco + VotosEnPositivo
+    
+    inconsistentes = filter(inconsistencias, v)
+''' 
 
     for telegrama in v:
         print(telegrama.TotalVotantes)
