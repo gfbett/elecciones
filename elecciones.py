@@ -21,7 +21,7 @@ class Telegrama:
         
 def main():
     v = cargar_datos()
-    inconsistentes = filter(telegramaConsistente, v)
+    inconsistentes = filter(telegramaInconsistente, v)
 
     for telegrama in inconsistentes:
         print(telegrama)
