@@ -23,21 +23,6 @@ def main():
     v = cargar_datos()
     inconsistentes = filter(telegramaInconsistente, v)
 
-    for telegrama in inconsistentes:
-        print(telegrama)
-    print("fin")
-
-    for telegrama in v:
-        print(telegrama.TotalVotantes)
-# previo a mostrar los telegramas filtraría por los que son inconsistentes.
-# aplicar uno o varios filter a la colección previo definir qué es inconsistentes
-# sugerencia:
-#     VotosPositivos = VotosCambiemos + VotosFPV
-#     VotosValidos = VotosPositivos + VotosEnBlanco
-#     TotalVotantes = VotosRecurridos + VotosImpugnados + VotosEnBlanco + VotosEnPositivo
-#    
-#    inconsistentes = filter(inconsistencias, v)
-
     sumaCambiemos = 0
     sumaFPV = 0
     sumaBlancos = 0
@@ -51,7 +36,8 @@ def main():
     porcentajeCambiemos = sumaCambiemos * 100/total
     print("Total FPV:", sumaFPV, "(", porcentajeFPV ,"%)" )
     print("Total Cambiemos", sumaCambiemos, "(", porcentajeCambiemos ,"%)" )
-def telegramaConsistente(t):
+
+def telegramaInconsistente(t):
     return not((t.VotosFPV + t.VotosCambiemos == t.VotosPositivos) and (t.VotosEnBlanco + t.VotosPositivos == t.VotosValidos) and (t.TotalVotantes == t.VotosValidos + t.VotosImpugnados + t.VotosRecurridos))
 
 def cargar_datos():
@@ -62,8 +48,8 @@ def cargar_datos():
             v.append(Telegrama(line))
             
         # limita la cantidad de telegramas
-        if len(v) == 500:
-            break
+        #if len(v) == 500:
+        #    break
     file.close()
     return v
 
