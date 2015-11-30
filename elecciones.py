@@ -21,21 +21,32 @@ class Telegrama:
         
 def main():
     v = cargar_datos()
-    inconsistentes = filter(telegramaInconsistente, v)
+    #inconsistentes = filter(telegramaInconsistente, v)
 
     sumaCambiemos = 0
     sumaFPV = 0
     sumaBlancos = 0
+    sumaDesvio = 0
+    mesasInconsistentes = 0
     for telegrama in v:
         sumaCambiemos += telegrama.VotosCambiemos
         sumaFPV += telegrama.VotosFPV
         sumaBlancos += telegrama.VotosEnBlanco
+        desvio = telegrama.TotalVotantes - (telegrama.VotosValidos + telegrama.VotosImpugnados + telegrama.VotosRecurridos)
+        mesasInconsistentes += 1 if desvio != 0 else 0;
+        sumaDesvio += desvio 
         
     total = sumaCambiemos + sumaFPV
     porcentajeFPV = sumaFPV * 100/total
     porcentajeCambiemos = sumaCambiemos * 100/total
+    porcentajeInconsistencias = mesasInconsistentes * 100 / len(v)
+    porcentajeDesvios = abs(sumaDesvio) * 100 / total
+    
     print("Total FPV:", sumaFPV, "(", porcentajeFPV ,"%)" )
     print("Total Cambiemos", sumaCambiemos, "(", porcentajeCambiemos ,"%)" )
+    print("Total votos desviados", sumaDesvio, "(", porcentajeDesvios, "%)")
+    print("Mesas con desvios ", mesasInconsistentes, " (",porcentajeInconsistencias,"%)")
+
 
 def telegramaInconsistente(t):
     return not((t.VotosFPV + t.VotosCambiemos == t.VotosPositivos) and (t.VotosEnBlanco + t.VotosPositivos == t.VotosValidos) and (t.TotalVotantes == t.VotosValidos + t.VotosImpugnados + t.VotosRecurridos))
