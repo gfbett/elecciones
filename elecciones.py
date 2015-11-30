@@ -6,7 +6,7 @@ class Telegrama:
         self.Circuito= parts[2]
         self.Mesa= int(parts[3])
         self.Telegrama= parts[4]
-        self.Electores= parts[5]
+        self.Electores= int(parts[5])
         self.TotalVotantes= int(parts[6])
         self.VotosRecurridos= int(parts[7])
         self.VotosImpugnados= int(parts[8])
@@ -22,7 +22,12 @@ class Telegrama:
 def main():
     v = cargar_datos()
     #inconsistentes = filter(telegramaInconsistente, v)
-
+    
+    inconsistentes = [t for t in v if (t.VotosCambiemos <= 0 or t.VotosEnBlanco < 0 or t.VotosFPV <= 0 or t.VotosImpugnados < 0 or t.VotosPositivos <= 0 or t.VotosRecurridos < 0 or t.VotosValidos <= 0 or t.TotalVotantes > t.Electores)]
+    print ("Telegramas inconsistentes: ", len(inconsistentes))
+    for t in inconsistentes:
+        print(t)
+    
     sumaCambiemos = 0
     sumaFPV = 0
     sumaBlancos = 0
