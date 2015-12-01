@@ -17,7 +17,7 @@ class Telegrama:
         self.VotosFPV= int(parts[13])
         
     def __str__(self):
-        return "Provincia:{0},Departamento:{1},Circuito:{2},Mesa:{3},Electores:{4},TotalVotantes:{5},VotosRecurridos:{6},VotosImpugnados:{7},VotosEnBlanco:{8},VotosPositivos:{9},VotosValidos:{10},VotosCambiemos:{11},VotosFPV:{12}".format(self.Provincia, self. Departamento, self. Circuito, self. Mesa, self. Electores, self. TotalVotantes, self.VotosRecurridos, self.VotosImpugnados, self.VotosEnBlanco, self.VotosPositivos, self.VotosValidos, self.VotosCambiemos, self.VotosFPV)
+        return "------------------\nProvincia:{0} - Departamento:{1} - Circuito:{2} - Mesa:{3}\nElectores:{4} - TotalVotantes:{5}\nVotosRecurridos:{6} - VotosImpugnados:{7} - VotosEnBlanco:{8}\nVotosPositivos:{9} - VotosValidos:{10}\nVotosCambiemos:{11} - VotosFPV:{12}\nTelegrama:{13}".format(self.Provincia, self. Departamento, self. Circuito, self. Mesa, self. Electores, self. TotalVotantes, self.VotosRecurridos, self.VotosImpugnados, self.VotosEnBlanco, self.VotosPositivos, self.VotosValidos, self.VotosCambiemos, self.VotosFPV, self.Telegrama)
         
 def main():
     v = cargar_datos()
